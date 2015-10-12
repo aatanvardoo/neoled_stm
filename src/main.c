@@ -3,7 +3,7 @@
 #include "Timers.h"
 #include "main.h"
 #include <string.h>
-#include "stm32f10x_i2c.h"
+#include "led.h"
 sTime gTime;
 extern uint8_t gDoMeasurement;
 uint8_t gTabToSend[10];
@@ -25,15 +25,12 @@ int main()
 
     RCC_Configuration();
     GPIO_Configuration();
-
     RTC_Conf();
     ConfirureTimerForDelay();
     UsartConf();
     NVIC_Configuration();
     SystemCoreClockUpdate();
     ws2812Init();
-    GPIOC->BRR = 0xFFFF;
-    GPIOC->BSRR |= 1<<2;
 
     ws2812Send(black, 16);
 
